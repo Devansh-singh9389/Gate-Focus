@@ -49,7 +49,7 @@ class TelegramCapsuleNavBar @JvmOverloads constructor(
         TabItem(R.id.nav_tracker, R.drawable.ic_checklist, R.string.tab_tracker),
         TabItem(R.id.nav_practice, R.drawable.ic_quiz, R.string.tab_practice),
         TabItem(R.id.nav_library, R.drawable.ic_library, R.string.tab_library),
-        TabItem(R.id.nav_guard, R.drawable.ic_shield, R.string.tab_guard)
+        TabItem(R.id.nav_settings, R.drawable.ic_settings, R.string.tab_settings)
     )
 
     interface OnTabSelectedListener {

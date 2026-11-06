@@ -10,6 +10,7 @@
     <string name="tab_practice">Practice</string>
     <string name="tab_library">Library</string>
     <string name="tab_guard">Guard</string>
+    <string name="tab_settings">Settings</string>
 
     <!-- Focus Tab -->
     <string name="app_tagline">GATE Computer Science · Focus Engine</string>
@@ -18,9 +19,11 @@
     <string name="focus_timer_title">FOCUS TIMER</string>
     <string name="stopwatch_title">PRECISION STOPWATCH</string>
 
-    <!-- Guard Tab -->
+    <!-- Guard Tab / Settings -->
     <string name="guard_title">Distraction Controls</string>
     <string name="guard_subtitle">Configure real-time app blockers and filters</string>
+    <string name="settings_title">Settings &amp; Preferences</string>
+    <string name="settings_subtitle">Configure study guard, timer rules, goals &amp; data</string>
 
     <!-- Library Tab -->
     <string name="library_title">Curated CSE Lectures</string>

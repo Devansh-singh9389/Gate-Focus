@@ -77,6 +77,10 @@ class MainActivity : AppCompatActivity() {
         const val KEY_STOPWATCH_RUNNING = "stopwatch_running"
         const val KEY_FOCUS_MODE = "focus_mode"
         const val KEY_AUTO_GUARD_ENABLED = "auto_guard_enabled"
+        const val KEY_STRICT_LOCKOUT = "strict_lockout_mode"
+        const val KEY_HAPTIC_ENABLED = "haptic_alerts_enabled"
+        const val KEY_TARGET_STREAM = "target_stream"
+        const val KEY_TARGET_YEAR = "target_year"
         val defaultBlockedApps = setOf(
             "com.instagram.android", "com.instagram.barcelona", "com.threads.android",
             "com.facebook.katana", "com.snapchat.android"
@@ -125,7 +129,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var trackerView: View
     private lateinit var practiceView: View
     private lateinit var libraryView: View
-    private lateinit var guardView: View
+    private lateinit var settingsView: View
     private lateinit var headerBadge: TextView
     private lateinit var mainTopAppBar: View
     private lateinit var telegramNavBar: TelegramCapsuleNavBar
@@ -185,19 +189,19 @@ class MainActivity : AppCompatActivity() {
         trackerView = inflater.inflate(R.layout.tab_tracker, null, false)
         practiceView = inflater.inflate(R.layout.tab_practice, null, false)
         libraryView = inflater.inflate(R.layout.tab_library, null, false)
-        guardView = inflater.inflate(R.layout.tab_guard, null, false)
+        settingsView = inflater.inflate(R.layout.tab_settings, null, false)
 
         // Setup controllers for each tab
         setupFocusTab()
         setupTrackerTab()
         setupPracticeTab()
         setupLibraryTab()
-        setupGuardTab()
+        setupSettingsTab()
 
         // Setup ViewPager2 with 5 tabs
         viewPager = findViewById(R.id.view_pager)
         viewPager.offscreenPageLimit = 4
-        viewPager.adapter = TabPagerAdapter(listOf(focusView, trackerView, practiceView, libraryView, guardView))
+        viewPager.adapter = TabPagerAdapter(listOf(focusView, trackerView, practiceView, libraryView, settingsView))
 
         // Telegram-style floating capsule navbar
         telegramNavBar = findViewById(R.id.telegram_nav_bar)
@@ -223,7 +227,7 @@ class MainActivity : AppCompatActivity() {
                     1 -> refreshTrackerProgress()
                     2 -> refreshPracticeHub()
                     3 -> refreshLibraryList()
-                    4 -> refreshTelegramChips()
+                    4 -> refreshSettingsTabStatus()
                 }
             }
         })
@@ -261,7 +265,7 @@ class MainActivity : AppCompatActivity() {
             R.id.nav_tracker -> 1
             R.id.nav_practice -> 2
             R.id.nav_library -> 3
-            R.id.nav_guard -> 4
+            R.id.nav_settings -> 4
             else -> 0
         }
         telegramNavBar.selectTab(position, animate = true, notify = false)
@@ -467,21 +471,18 @@ class MainActivity : AppCompatActivity() {
     private fun handlePrimaryToggleClick() {
         if (currentFocusMode == FocusMode.POMODORO) {
             if (timerRunning) {
-                // Stop / Pause Focus -> Turn OFF strict guard immediately
-                handler.removeCallbacks(timerRunnable)
-                val remainingMs = (timerTargetEndTime - System.currentTimeMillis()).coerceAtLeast(0L)
-                secondsLeft = ((remainingMs + 500) / 1000).toInt()
-                timerRunning = false
-                btnFocusToggle.text = "Resume Focus"
-                btnFocusToggle.setIconResource(R.drawable.ic_play)
-                setTimerPresetChipsLocked(false)
-                saveFocusTimerState()
-
-                if (switchAutoGuard.isChecked) {
-                    setStudyGuardActive(false)
+                if (prefs.getBoolean(KEY_STRICT_LOCKOUT, false)) {
+                    AlertDialog.Builder(this)
+                        .setTitle("Strict Lockout Active 🔒")
+                        .setMessage("Strict Study Lockout is enabled in Settings. Are you sure you want to stop this study session early?")
+                        .setPositiveButton("Emergency Stop") { _, _ ->
+                            stopFocusTimerInternal()
+                        }
+                        .setNegativeButton("Keep Focusing", null)
+                        .show()
+                    return
                 }
-
-                updateFocusGuardUI()
+                stopFocusTimerInternal()
             } else {
                 // Start Focus -> Turn ON strict guard immediately
                 if (secondsLeft <= 0) {
@@ -603,6 +604,23 @@ class MainActivity : AppCompatActivity() {
         chip60.alpha = alphaVal
     }
 
+    private fun stopFocusTimerInternal() {
+        handler.removeCallbacks(timerRunnable)
+        val remainingMs = (timerTargetEndTime - System.currentTimeMillis()).coerceAtLeast(0L)
+        secondsLeft = ((remainingMs + 500) / 1000).toInt()
+        timerRunning = false
+        btnFocusToggle.text = "Resume Focus"
+        btnFocusToggle.setIconResource(R.drawable.ic_play)
+        setTimerPresetChipsLocked(false)
+        saveFocusTimerState()
+
+        if (switchAutoGuard.isChecked) {
+            setStudyGuardActive(false)
+        }
+
+        updateFocusGuardUI()
+    }
+
     private fun onFocusTimerCompleted() {
         timerRunning = false
         secondsLeft = 0
@@ -622,15 +640,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Haptic vibration alert
-        try {
-            val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as? Vibrator
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                vibrator?.vibrate(VibrationEffect.createWaveform(longArrayOf(0, 400, 200, 400), -1))
-            } else {
-                @Suppress("DEPRECATION")
-                vibrator?.vibrate(longArrayOf(0, 400, 200, 400), -1)
-            }
-        } catch (_: Exception) {}
+        if (prefs.getBoolean(KEY_HAPTIC_ENABLED, true)) {
+            try {
+                val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as? Vibrator
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    vibrator?.vibrate(VibrationEffect.createWaveform(longArrayOf(0, 400, 200, 400), -1))
+                } else {
+                    @Suppress("DEPRECATION")
+                    vibrator?.vibrate(longArrayOf(0, 400, 200, 400), -1)
+                }
+            } catch (_: Exception) {}
+        }
 
         Toast.makeText(this, "Focus session complete! Time for a short break.", Toast.LENGTH_LONG).show()
 
@@ -1844,28 +1864,27 @@ class MainActivity : AppCompatActivity() {
     }
 
     // -------------------------------------------------------------
-    // Guard Tab Logic
+    // Settings Tab Logic (Focus Guard, Timer Rules, Goals & Data)
     // -------------------------------------------------------------
-    private fun setupGuardTab() {
-        // YouTube Shorts toggles
-        val switchShorts = guardView.findViewById<MaterialSwitch>(R.id.switch_block_shorts)
+    private fun setupSettingsTab() {
+        // --- 1. Focus Guard & App Blocker ---
+        val switchShorts = settingsView.findViewById<MaterialSwitch>(R.id.switch_block_shorts)
         switchShorts.isChecked = prefs.getBoolean(KEY_BLOCK_YOUTUBE_SHORTS, true)
         switchShorts.setOnCheckedChangeListener { _, isChecked ->
             prefs.edit().putBoolean(KEY_BLOCK_YOUTUBE_SHORTS, isChecked).apply()
         }
 
-        val switchShortVideos = guardView.findViewById<MaterialSwitch>(R.id.switch_block_short_videos)
+        val switchShortVideos = settingsView.findViewById<MaterialSwitch>(R.id.switch_block_short_videos)
         switchShortVideos.isChecked = prefs.getBoolean(KEY_BLOCK_SHORT_VIDEOS_60S, true)
         switchShortVideos.setOnCheckedChangeListener { _, isChecked ->
             prefs.edit().putBoolean(KEY_BLOCK_SHORT_VIDEOS_60S, isChecked).apply()
         }
 
-        // Distraction App switches
         val selectedApps = getSavedBlockedApps().toMutableSet()
         selectedApps.remove("com.google.android.youtube") // Keep YouTube allowed
 
         fun bindAppSwitch(switchId: Int, pkg: String) {
-            val sw = guardView.findViewById<MaterialSwitch>(switchId)
+            val sw = settingsView.findViewById<MaterialSwitch>(switchId)
             sw.isChecked = pkg in selectedApps
             sw.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) selectedApps.add(pkg) else selectedApps.remove(pkg)
@@ -1879,10 +1898,9 @@ class MainActivity : AppCompatActivity() {
         bindAppSwitch(R.id.switch_block_snapchat, "com.snapchat.android")
 
         // Telegram allowlist
-        val switchTelegram = guardView.findViewById<MaterialSwitch>(R.id.switch_telegram_filter)
-        val inputTelegram = guardView.findViewById<TextInputEditText>(R.id.input_telegram_allowed)
-        val btnSaveTelegram = guardView.findViewById<MaterialButton>(R.id.btn_save_telegram)
-        val btnPermTelegram = guardView.findViewById<MaterialButton>(R.id.btn_telegram_permission)
+        val switchTelegram = settingsView.findViewById<MaterialSwitch>(R.id.switch_telegram_filter)
+        val inputTelegram = settingsView.findViewById<TextInputEditText>(R.id.input_telegram_allowed)
+        val btnSaveTelegram = settingsView.findViewById<MaterialButton>(R.id.btn_save_telegram)
 
         switchTelegram.isChecked = prefs.getBoolean(KEY_TELEGRAM_FILTER, true)
         switchTelegram.setOnCheckedChangeListener { _, isChecked ->
@@ -1902,15 +1920,155 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Telegram allowlist updated", Toast.LENGTH_SHORT).show()
         }
 
-        btnPermTelegram.setOnClickListener {
+        refreshTelegramChips()
+
+        // --- 2. Timer & Session Rules ---
+        val switchStrict = settingsView.findViewById<MaterialSwitch>(R.id.switch_strict_lockout)
+        switchStrict.isChecked = prefs.getBoolean(KEY_STRICT_LOCKOUT, false)
+        switchStrict.setOnCheckedChangeListener { _, isChecked ->
+            prefs.edit().putBoolean(KEY_STRICT_LOCKOUT, isChecked).apply()
+        }
+
+        val switchHaptic = settingsView.findViewById<MaterialSwitch>(R.id.switch_haptic_feedback)
+        switchHaptic.isChecked = prefs.getBoolean(KEY_HAPTIC_ENABLED, true)
+        switchHaptic.setOnCheckedChangeListener { _, isChecked ->
+            prefs.edit().putBoolean(KEY_HAPTIC_ENABLED, isChecked).apply()
+        }
+
+        // --- 3. GATE Exam Target Goal ---
+        val chipStreamCse = settingsView.findViewById<Chip>(R.id.chip_stream_cse)
+        val chipStreamDa = settingsView.findViewById<Chip>(R.id.chip_stream_da)
+        val savedStream = prefs.getString(KEY_TARGET_STREAM, "CSE") ?: "CSE"
+        if (savedStream == "DA") chipStreamDa.isChecked = true else chipStreamCse.isChecked = true
+
+        chipStreamCse.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) prefs.edit().putString(KEY_TARGET_STREAM, "CSE").apply()
+        }
+        chipStreamDa.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) prefs.edit().putString(KEY_TARGET_STREAM, "DA").apply()
+        }
+
+        val chipYear2025 = settingsView.findViewById<Chip>(R.id.chip_year_2025)
+        val chipYear2026 = settingsView.findViewById<Chip>(R.id.chip_year_2026)
+        val chipYear2027 = settingsView.findViewById<Chip>(R.id.chip_year_2027)
+        val savedYear = prefs.getString(KEY_TARGET_YEAR, "2026") ?: "2026"
+        when (savedYear) {
+            "2025" -> chipYear2025.isChecked = true
+            "2027" -> chipYear2027.isChecked = true
+            else -> chipYear2026.isChecked = true
+        }
+
+        chipYear2025.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) prefs.edit().putString(KEY_TARGET_YEAR, "2025").apply()
+        }
+        chipYear2026.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) prefs.edit().putString(KEY_TARGET_YEAR, "2026").apply()
+        }
+        chipYear2027.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) prefs.edit().putString(KEY_TARGET_YEAR, "2027").apply()
+        }
+
+        // --- 4. Data, Backup & Reset ---
+        val btnExport = settingsView.findViewById<MaterialButton>(R.id.btn_export_backup)
+        val btnReset = settingsView.findViewById<MaterialButton>(R.id.btn_reset_progress)
+
+        btnExport.setOnClickListener {
+            exportProgressBackup()
+        }
+
+        btnReset.setOnClickListener {
+            AlertDialog.Builder(this)
+                .setTitle("Reset Syllabus Progress? ⚠️")
+                .setMessage("This will clear all completed topics and personal notes. This action cannot be undone.")
+                .setPositiveButton("Reset Everything") { _, _ ->
+                    val syllabusPrefs = getSharedPreferences("gate_focus_syllabus_prefs", MODE_PRIVATE)
+                    syllabusPrefs.edit().clear().apply()
+                    setupTrackerTab()
+                    refreshTrackerProgress()
+                    Toast.makeText(this, "Syllabus progress has been reset", Toast.LENGTH_SHORT).show()
+                }
+                .setNegativeButton("Cancel", null)
+                .show()
+        }
+
+        // --- 5. System Permissions & Health ---
+        val btnManageAcc = settingsView.findViewById<MaterialButton>(R.id.btn_manage_accessibility)
+        val btnManageNotif = settingsView.findViewById<MaterialButton>(R.id.btn_manage_notification)
+
+        btnManageAcc.setOnClickListener {
+            openAccessibilitySettings()
+        }
+
+        btnManageNotif.setOnClickListener {
             openNotificationListenerSettings()
         }
 
-        refreshTelegramChips()
+        refreshSettingsTabStatus()
+    }
+
+    private fun refreshSettingsTabStatus() {
+        val badgeAcc = settingsView.findViewById<TextView>(R.id.badge_accessibility_status) ?: return
+        val badgeNotif = settingsView.findViewById<TextView>(R.id.badge_notification_status) ?: return
+
+        val isAcc = isAccessibilityEnabled()
+        if (isAcc) {
+            badgeAcc.text = "Active ✓ (Blocking Enforced)"
+            badgeAcc.setTextColor(ContextCompat.getColor(this, R.color.accent_emerald_text))
+        } else {
+            badgeAcc.text = "Permission Needed ⚠️ (Blocking Inactive)"
+            badgeAcc.setTextColor(ContextCompat.getColor(this, R.color.accent_amber))
+        }
+
+        val isNotif = isNotificationListenerEnabled()
+        if (isNotif) {
+            badgeNotif.text = "Active ✓ (Telegram Filtering Enabled)"
+            badgeNotif.setTextColor(ContextCompat.getColor(this, R.color.accent_emerald_text))
+        } else {
+            badgeNotif.text = "Disabled (Notifications Unfiltered)"
+            badgeNotif.setTextColor(ContextCompat.getColor(this, R.color.text_secondary))
+        }
+    }
+
+    private fun exportProgressBackup() {
+        try {
+            val root = JSONObject()
+            root.put("app", "GateFocus")
+            root.put("export_version", 1)
+            root.put("export_timestamp", System.currentTimeMillis())
+
+            val subjects = syllabusRepo.getSubjects()
+            val completedList = JSONArray()
+            val notesObj = JSONObject()
+
+            for (subject in subjects) {
+                for (topic in subject.topics) {
+                    val progress = syllabusRepo.getTopicProgress(topic.id)
+                    if (progress.isCompleted) {
+                        completedList.put(topic.id)
+                    }
+                    val notes = syllabusRepo.getTopicNotes(topic.id)
+                    if (notes.isNotBlank()) {
+                        notesObj.put(topic.id, notes)
+                    }
+                }
+            }
+
+            root.put("completed_topics", completedList)
+            root.put("topic_notes", notesObj)
+
+            val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                type = "text/plain"
+                putExtra(Intent.EXTRA_SUBJECT, "GateFocus_Backup_${System.currentTimeMillis()}.json")
+                putExtra(Intent.EXTRA_TEXT, root.toString(2))
+            }
+            startActivity(Intent.createChooser(shareIntent, "Export GateFocus Progress Backup"))
+        } catch (e: Exception) {
+            Toast.makeText(this, "Export failed: ${e.message}", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun refreshTelegramChips() {
-        val container = guardView.findViewById<LinearLayout>(R.id.layout_telegram_chips) ?: return
+        val container = settingsView.findViewById<LinearLayout>(R.id.layout_telegram_chips) ?: return
         container.removeAllViews()
         val allowed = getSavedAllowedTelegram()
         if (allowed.isEmpty()) {
