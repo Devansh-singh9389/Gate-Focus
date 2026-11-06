@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/bg_card_secondary"
+    android:orientation="vertical"
+    android:padding="14dp">
+
+    <!-- Top Row: Topic Info & Completion Checkbox -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_topic_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_primary"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/text_topic_subtopics"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:lineSpacingExtra="2dp"
+                android:textColor="@color/text_secondary"
+                android:textSize="11.5sp" />
+        </LinearLayout>
+
+        <!-- Single Clean Complete Tick -->
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/cb_topic_complete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Done"
+            android:textColor="@color/accent_emerald_text"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            app:buttonTint="@color/accent_emerald" />
+    </LinearLayout>
+
+    <!-- Downside Action Row: Notes & YouTube Lecture -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <!-- Topic Notes Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_topic_notes"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:paddingHorizontal="10dp"
+            android:text="Notes"
+            android:textColor="@color/primary_indigo_light"
+            android:textSize="11.5sp"
+            app:cornerRadius="8dp"
+            app:icon="@drawable/ic_notes"
+            app:iconSize="14dp"
+            app:iconTint="@color/primary_indigo_light"
+            app:strokeColor="@color/border_subtle" />
+
+        <!-- Watch Lecture Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_watch_topic_lecture"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_marginStart="8dp"
+            android:paddingHorizontal="10dp"
+            android:text="Lecture"
+            android:textColor="@color/youtube_red"
+            android:textSize="11.5sp"
+            app:cornerRadius="8dp"
+            app:icon="@drawable/ic_youtube"
+            app:iconSize="15dp"
+            app:iconTint="@color/youtube_red"
+            app:strokeColor="@color/border_subtle" />
+    </LinearLayout>
+
+</LinearLayout>

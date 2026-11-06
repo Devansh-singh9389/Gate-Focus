@@ -3,4 +3,27 @@
     <string name="app_name">GATE FOCUS</string>
     <string name="blocker_service_description">Monitors and blocks distracting apps during study sessions.</string>
     <string name="telegram_listener_description">Filters study and non-study notifications from Telegram.</string>
+
+    <!-- Navigation -->
+    <string name="tab_focus">Focus</string>
+    <string name="tab_tracker">Tracker</string>
+    <string name="tab_practice">Practice</string>
+    <string name="tab_library">Library</string>
+    <string name="tab_guard">Guard</string>
+
+    <!-- Focus Tab -->
+    <string name="app_tagline">GATE Computer Science · Focus Engine</string>
+    <string name="btn_start_study">START STRICT STUDY MODE</string>
+    <string name="btn_stop_study">STOP STUDY MODE</string>
+    <string name="focus_timer_title">FOCUS TIMER</string>
+    <string name="stopwatch_title">PRECISION STOPWATCH</string>
+
+    <!-- Guard Tab -->
+    <string name="guard_title">Distraction Controls</string>
+    <string name="guard_subtitle">Configure real-time app blockers and filters</string>
+
+    <!-- Library Tab -->
+    <string name="library_title">Curated CSE Lectures</string>
+    <string name="library_subtitle">Direct distraction-free YouTube playback</string>
+    <string name="btn_load_starter_lectures">Load Recommended GATE Lectures</string>
 </resources>

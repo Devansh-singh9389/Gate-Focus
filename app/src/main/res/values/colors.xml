@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Background & Surfaces -->
+    <color name="bg_app">#090D16</color>
+    <color name="bg_surface">#131B2E</color>
+    <color name="bg_card">#1A243B</color>
+    <color name="bg_card_secondary">#222F4C</color>
+    <color name="border_subtle">#2A3A5E</color>
+    <color name="border_active">#4F46E5</color>
+
+    <!-- Floating Navbar (Telegram Style) -->
+    <color name="bg_floating_nav">#161F33</color>
+    <color name="border_floating_nav">#2E3D5C</color>
+    <color name="telegram_nav_bg">#151E30</color>
+    <color name="telegram_nav_border">#2E3D5C</color>
+    <color name="telegram_indicator_bg">#232F4A</color>
+    <color name="telegram_indicator_border">#38496D</color>
+    <color name="telegram_active_glow">#60A5FA</color>
+    <color name="nav_indicator">#2D325A</color>
+    <color name="nav_selected_text">#A5B4FC</color>
+    <color name="nav_active">#818CF8</color>
+    <color name="nav_inactive">#94A3B8</color>
+
+    <!-- High-Contrast Buttons -->
+    <color name="btn_text_pure_white">#FFFFFF</color>
+    <color name="btn_text_secondary">#F1F5F9</color>
+    <color name="btn_primary_bg">#4F46E5</color>
+    <color name="btn_primary_bg_pressed">#4338CA</color>
+    <color name="btn_stop_bg">#DC2626</color>
+    <color name="btn_secondary_bg">#1E293B</color>
+    <color name="btn_secondary_border">#475569</color>
+
+    <!-- Brand & Accent -->
+    <color name="primary_indigo">#6366F1</color>
+    <color name="primary_indigo_dark">#4338CA</color>
+    <color name="primary_indigo_light">#818CF8</color>
+
+    <!-- Status & Alerts -->
+    <color name="accent_emerald">#10B981</color>
+    <color name="accent_emerald_bg">#13332A</color>
+    <color name="accent_emerald_text">#34D399</color>
+
+    <color name="accent_amber">#F59E0B</color>
+    <color name="accent_amber_bg">#3D2C10</color>
+
+    <color name="accent_rose">#EF4444</color>
+    <color name="accent_rose_bg">#38181D</color>
+    <color name="accent_rose_text">#F87171</color>
+
+    <color name="youtube_red">#FF0000</color>
+    <color name="telegram_blue">#24A1DE</color>
+
+    <!-- Typography -->
+    <color name="text_primary">#F8FAFC</color>
+    <color name="text_secondary">#94A3B8</color>
+    <color name="text_tertiary">#64748B</color>
+</resources>

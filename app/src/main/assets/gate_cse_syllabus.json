@@ -1,0 +1,455 @@
+[
+  {
+    "id": "os",
+    "name": "Operating Systems",
+    "shortCode": "OS",
+    "description": "Processes, Threads, CPU Scheduling, Deadlocks, Memory Management, Virtual Memory, File Systems",
+    "topics": [
+      {
+        "id": "os_intro",
+        "subjectId": "os",
+        "title": "Introduction, System Calls & Process States",
+        "subtopics": ["Kernel vs User Mode", "Dual Mode Operation", "Process Control Block (PCB)", "Fork & Exec"],
+        "recommendedVideoId": "2i2N_Qo_fyM"
+      },
+      {
+        "id": "os_cpu_sched",
+        "subjectId": "os",
+        "title": "CPU Scheduling Algorithms",
+        "subtopics": ["FCFS, SJF, SRTF", "Round Robin & Quantum", "Priority Scheduling", "Multilevel Feedback Queues"],
+        "recommendedVideoId": "ewdnODPnGvI"
+      },
+      {
+        "id": "os_sync",
+        "subjectId": "os",
+        "title": "Process Synchronization & Concurrency",
+        "subtopics": ["Critical Section Problem", "Peterson's Algorithm", "Semaphores (Binary & Counting)", "Classic Problems (Producer-Consumer, Dining Philosophers)"],
+        "recommendedVideoId": "0s_qF_13d_o"
+      },
+      {
+        "id": "os_deadlocks",
+        "subjectId": "os",
+        "title": "Deadlocks",
+        "subtopics": ["4 Necessary Conditions", "Resource Allocation Graph (RAG)", "Banker's Algorithm", "Deadlock Detection & Recovery"],
+        "recommendedVideoId": "rWFH6dfK9fw"
+      },
+      {
+        "id": "os_memory",
+        "subjectId": "os",
+        "title": "Memory Management & Paging",
+        "subtopics": ["Contiguous Allocation", "Paging & Page Tables", "Multi-level Paging", "TLB & Effective Memory Access Time (EMAT)"],
+        "recommendedVideoId": "pJ6qrCB8pZw"
+      },
+      {
+        "id": "os_virtual_mem",
+        "subjectId": "os",
+        "title": "Virtual Memory & Page Replacement",
+        "subtopics": ["Demand Paging", "FIFO, LRU, Optimal Replacement", "Belady's Anomaly", "Thrashing & Working Set Model"],
+        "recommendedVideoId": "U1Jpwb80f-A"
+      },
+      {
+        "id": "os_file_io",
+        "subjectId": "os",
+        "title": "File Systems & Disk Scheduling",
+        "subtopics": ["File Allocation Methods (Contiguous, Linked, Indexed)", "Inodes & Directory Structure", "FCFS, SSTF, SCAN, C-SCAN, LOOK"],
+        "recommendedVideoId": "tqFw8eXgI7s"
+      }
+    ]
+  },
+  {
+    "id": "dbms",
+    "name": "Database Management Systems",
+    "shortCode": "DBMS",
+    "description": "ER Model, Relational Algebra, SQL, Normalization, Transactions, Concurrency Control, Indexing",
+    "topics": [
+      {
+        "id": "dbms_er_rel",
+        "subjectId": "dbms",
+        "title": "ER Model & Relational Model",
+        "subtopics": ["Entity Sets, Attributes, Keys", "Cardinality & Participation Constraints", "Converting ER to Relational Tables"],
+        "recommendedVideoId": "kBdlM6hHwuc"
+      },
+      {
+        "id": "dbms_ra_sql",
+        "subjectId": "dbms",
+        "title": "Relational Algebra & SQL Queries",
+        "subtopics": ["Selection, Projection, Join Operations", "Tuple & Domain Relational Calculus", "Nested Queries, GROUP BY, HAVING, Aggregate Functions"],
+        "recommendedVideoId": "HXV3zeRR3nw"
+      },
+      {
+        "id": "dbms_normal",
+        "subjectId": "dbms",
+        "title": "Functional Dependencies & Normalization",
+        "subtopics": ["Closure of Attribute Sets", "Minimal Cover", "1NF, 2NF, 3NF, BCNF", "Lossless Join & Dependency Preservation"],
+        "recommendedVideoId": "5fs1HDom6eU"
+      },
+      {
+        "id": "dbms_trans",
+        "subjectId": "dbms",
+        "title": "Transactions & Concurrency Control",
+        "subtopics": ["ACID Properties", "Conflict & View Serializability", "Recoverability & Cascading Rollbacks", "Two-Phase Locking (2PL), Strict & Rigorous 2PL"],
+        "recommendedVideoId": "eYpTqq_1p6g"
+      },
+      {
+        "id": "dbms_indexing",
+        "subjectId": "dbms",
+        "title": "File Organization & Indexing (B / B+ Trees)",
+        "subtopics": ["Primary, Clustering, Secondary Indexing", "B-Tree Insertion & Deletion", "B+ Tree Properties & Order Calculations"],
+        "recommendedVideoId": "aZjYr87r1b8"
+      }
+    ]
+  },
+  {
+    "id": "cn",
+    "name": "Computer Networks",
+    "shortCode": "CN",
+    "description": "OSI/TCP-IP Stack, Flow & Error Control, IP Addressing, Routing Protocols, TCP/UDP, Application Protocols",
+    "topics": [
+      {
+        "id": "cn_layers",
+        "subjectId": "cn",
+        "title": "Basics & Physical Layer",
+        "subtopics": ["OSI vs TCP/IP Layers", "Transmission Delays (Propagation, Transmission, Queuing, Processing)", "Bandwidth-Delay Product"],
+        "recommendedVideoId": "VwN91x5iWi8"
+      },
+      {
+        "id": "cn_datalink",
+        "subjectId": "cn",
+        "title": "Data Link Layer & MAC Protocols",
+        "subtopics": ["Framing & CRC Error Detection", "Stop-and-Wait, Go-Back-N, Selective Repeat ARQ", "Pure & Slotted ALOHA", "CSMA/CD & Exponential Backoff"],
+        "recommendedVideoId": "IPvYjXCsTg8"
+      },
+      {
+        "id": "cn_network",
+        "subjectId": "cn",
+        "title": "Network Layer: IP Addressing & Subnetting",
+        "subtopics": ["IPv4 Header & Fragmentation", "CIDR Subnetting & Supernetting", "NAT & ARP/RARP"],
+        "recommendedVideoId": "qiQR5rTSshw"
+      },
+      {
+        "id": "cn_routing",
+        "subjectId": "cn",
+        "title": "Routing Algorithms",
+        "subtopics": ["Distance Vector Routing & Count-to-Infinity", "Link State Routing & Dijkstra", "RIP, OSPF, BGP"],
+        "recommendedVideoId": "1r4XWvG5cQI"
+      },
+      {
+        "id": "cn_transport",
+        "subjectId": "cn",
+        "title": "Transport Layer (TCP / UDP)",
+        "subtopics": ["TCP 3-Way Handshake & Connection Teardown", "TCP Flow Control (Sliding Window)", "TCP Congestion Control (Slow Start, Congestion Avoidance, AIMD)"],
+        "recommendedVideoId": "JFF2vJaN0Cw"
+      },
+      {
+        "id": "cn_application",
+        "subjectId": "cn",
+        "title": "Application Layer & Network Security",
+        "subtopics": ["DNS Hierarchical Resolution", "HTTP, SMTP, FTP", "Symmetric vs Asymmetric Key Cryptography (RSA)", "Digital Signatures & Firewalls"],
+        "recommendedVideoId": "k9ZGsULLmkM"
+      }
+    ]
+  },
+  {
+    "id": "toc",
+    "name": "Theory of Computation",
+    "shortCode": "TOC",
+    "description": "Regular Languages, Finite Automata, Context-Free Languages, Pushdown Automata, Turing Machines, Decidability",
+    "topics": [
+      {
+        "id": "toc_fa",
+        "subjectId": "toc",
+        "title": "Finite Automata & Regular Languages",
+        "subtopics": ["DFA & NFA Construction", "NFA to DFA Conversion (Subset Construction)", "Minimization of DFA (Myhill-Nerode theorem)", "Regular Expressions"],
+        "recommendedVideoId": "58N2N7zJGrQ"
+      },
+      {
+        "id": "toc_pumping_reg",
+        "subjectId": "toc",
+        "title": "Pumping Lemma & Closure Properties of Regular Languages",
+        "subtopics": ["Pumping Lemma for Regular Languages", "Closure Properties under Union, Intersection, Complement, Kleene Star"],
+        "recommendedVideoId": "XslI8h7c9as"
+      },
+      {
+        "id": "toc_cfl_pda",
+        "subjectId": "toc",
+        "title": "Context-Free Languages & Pushdown Automata",
+        "subtopics": ["Context-Free Grammars (CFG) & Ambiguity", "Chomsky Normal Form (CNF)", "Deterministic PDA vs Non-Deterministic PDA", "Closure Properties of CFLs & DCFLs"],
+        "recommendedVideoId": "d3q48_Z1tH0"
+      },
+      {
+        "id": "toc_tm_decide",
+        "subjectId": "toc",
+        "title": "Turing Machines & Decidability",
+        "subtopics": ["Standard Turing Machine Definition", "Recursive & Recursively Enumerable Languages", "Halting Problem of Turing Machine", "Rice's Theorem & Reducibility"],
+        "recommendedVideoId": "9cu_tY1q6XU"
+      }
+    ]
+  },
+  {
+    "id": "cd",
+    "name": "Compiler Design",
+    "shortCode": "CD",
+    "description": "Lexical Analysis, Parsing (LL, LR), Syntax Directed Translation, Intermediate Code Generation, Code Optimization",
+    "topics": [
+      {
+        "id": "cd_lex",
+        "subjectId": "cd",
+        "title": "Lexical Analysis & Tokens",
+        "subtopics": ["Tokens, Patterns, Lexemes", "Regular Expressions to DFA in Lexers", "Counting Tokens & Lexical Errors"],
+        "recommendedVideoId": "Qkwj65l_96I"
+      },
+      {
+        "id": "cd_syntax",
+        "subjectId": "cd",
+        "title": "Syntax Analysis & Parsing",
+        "subtopics": ["First & Follow Sets", "LL(1) Parsing Table Construction & Conflicts", "LR(0), SLR(1), LALR(1), CLR(1) Parsing", "Shift-Reduce & Reduce-Reduce Conflicts"],
+        "recommendedVideoId": "H4Mc3S4f4eU"
+      },
+      {
+        "id": "cd_sdt",
+        "subjectId": "cd",
+        "title": "Syntax-Directed Translation (SDT)",
+        "subtopics": ["Synthesized vs Inherited Attributes", "S-attributed vs L-attributed Definitions"],
+        "recommendedVideoId": "1TpmXp1X5wE"
+      },
+      {
+        "id": "cd_opt",
+        "subjectId": "cd",
+        "title": "Intermediate Code & Code Optimization",
+        "subtopics": ["Three Address Code (Quadruples, Triples)", "Basic Blocks & Flow Graphs", "Loop Optimization & Common Subexpression Elimination"],
+        "recommendedVideoId": "bJ2W1dC3ZJ8"
+      }
+    ]
+  },
+  {
+    "id": "dsa",
+    "name": "Data Structures & C Programming",
+    "shortCode": "DSA",
+    "description": "Pointers, Recursion, Arrays, Stacks, Queues, Linked Lists, Trees, BST, Heaps, Graph Representations",
+    "topics": [
+      {
+        "id": "dsa_c_lang",
+        "subjectId": "dsa",
+        "title": "C Programming: Pointers, Scopes & Recursion",
+        "subtopics": ["Pointer Arithmetic & Dereferencing", "Function Call Stack & Recursion Tracing", "Static & Dynamic Memory Allocation"],
+        "recommendedVideoId": "irqbmMNs2Bo"
+      },
+      {
+        "id": "dsa_linear",
+        "subjectId": "dsa",
+        "title": "Linear Structures: Arrays, Stacks, Queues, Linked Lists",
+        "subtopics": ["Row/Column Major Ordering", "Infix to Postfix Conversion & Stack Evaluation", "Circular Queues", "Singly & Doubly Linked List Operations"],
+        "recommendedVideoId": "RBSGKlAnoiM"
+      },
+      {
+        "id": "dsa_trees",
+        "subjectId": "dsa",
+        "title": "Trees & Binary Search Trees (BST)",
+        "subtopics": ["Binary Tree Traversals (Inorder, Preorder, Postorder)", "Binary Search Tree Insertion, Deletion & Search", "AVL Trees & Rotations"],
+        "recommendedVideoId": "oSWTXtMglKE"
+      },
+      {
+        "id": "dsa_heaps_hash",
+        "subjectId": "dsa",
+        "title": "Binary Heaps & Hashing",
+        "subtopics": ["Min-Heap & Max-Heap Operations", "Heapify & Priority Queues", "Collision Resolution (Chaining, Linear/Quadratic Probing, Double Hashing)"],
+        "recommendedVideoId": "HqPJF2L5h9U"
+      }
+    ]
+  },
+  {
+    "id": "algo",
+    "name": "Algorithms",
+    "shortCode": "ALGO",
+    "description": "Asymptotic Analysis, Divide & Conquer, Greedy, Dynamic Programming, Graph Algorithms (BFS, DFS, MST, Shortest Paths)",
+    "topics": [
+      {
+        "id": "algo_asymp",
+        "subjectId": "algo",
+        "title": "Asymptotic Analysis & Recurrences",
+        "subtopics": ["Big-O, Big-Omega, Big-Theta", "Master Theorem & Substitution Method", "Recursion Tree Method"],
+        "recommendedVideoId": "A03oI0znAoc"
+      },
+      {
+        "id": "algo_sorting",
+        "subjectId": "algo",
+        "title": "Divide & Conquer and Sorting",
+        "subtopics": ["Merge Sort & Inversion Count", "Quick Sort & Best/Worst Case", "Heap Sort", "Lower Bound on Comparison Sorting"],
+        "recommendedVideoId": "jlHkDBEumP0"
+      },
+      {
+        "id": "algo_greedy_dp",
+        "subjectId": "algo",
+        "title": "Greedy Algorithms & Dynamic Programming",
+        "subtopics": ["Fractional Knapsack & Huffman Coding", "0/1 Knapsack & Matrix Chain Multiplication", "Longest Common Subsequence (LCS)", "Subset Sum Problem"],
+        "recommendedVideoId": "oBt53YbR9Kk"
+      },
+      {
+        "id": "algo_graphs",
+        "subjectId": "algo",
+        "title": "Graph Algorithms & Minimum Spanning Trees",
+        "subtopics": ["BFS & DFS Traversals", "Topological Sort & DAGs", "Kruskal's & Prim's Algorithm (Disjoint Sets)", "Dijkstra's & Bellman-Ford Shortest Path"],
+        "recommendedVideoId": "pcKY4hjDrxk"
+      }
+    ]
+  },
+  {
+    "id": "coa",
+    "name": "Computer Organization & Architecture",
+    "shortCode": "COA",
+    "description": "Machine Instructions, Addressing Modes, ALU, Data Path, Pipelining, Cache Memory & Mapping",
+    "topics": [
+      {
+        "id": "coa_instr",
+        "subjectId": "coa",
+        "title": "Machine Instructions & Addressing Modes",
+        "subtopics": ["Instruction Formats & Opcode Encoding", "Immediate, Direct, Indirect, Indexed, Base-Register, Relative Addressing", "Instruction Cycle"],
+        "recommendedVideoId": "L9X7XXfHYdU"
+      },
+      {
+        "id": "coa_pipe",
+        "subjectId": "coa",
+        "title": "Instruction Pipelining & Hazards",
+        "subtopics": ["Pipeline Stages, Speedup, Throughput & Efficiency", "Structural, Data (RAW, WAR, WAW) & Control Hazards", "Branch Prediction & Stalling"],
+        "recommendedVideoId": "jFDM_q3sY8U"
+      },
+      {
+        "id": "coa_cache",
+        "subjectId": "coa",
+        "title": "Memory Hierarchy & Cache Mapping",
+        "subtopics": ["Direct, Fully Associative & Set-Associative Mapping", "Hit Rate, Miss Penalty & Average Memory Access Time (AMAT)", "Write-Through vs Write-Back"],
+        "recommendedVideoId": "6JkWbYj9C44"
+      },
+      {
+        "id": "coa_io",
+        "subjectId": "coa",
+        "title": "I/O Interface & Interrupts",
+        "subtopics": ["Programmed I/O vs Interrupt-driven I/O", "Direct Memory Access (DMA) & Cycle Stealing", "Vectored vs Non-Vectored Interrupts"],
+        "recommendedVideoId": "kX8Yy9uI0p8"
+      }
+    ]
+  },
+  {
+    "id": "dl",
+    "name": "Digital Logic",
+    "shortCode": "DL",
+    "description": "Boolean Algebra, Logic Gates, K-Maps, Combinational Circuits (Adders, Multiplexers), Sequential Circuits (Flip-Flops, Counters)",
+    "topics": [
+      {
+        "id": "dl_bool",
+        "subjectId": "dl",
+        "title": "Boolean Algebra & K-Maps",
+        "subtopics": ["Logic Gates & Universal Gates (NAND, NOR)", "Minimization using Karnaugh Maps (K-Maps)", "Don't Care Conditions"],
+        "recommendedVideoId": "RO5alU6ZUEE"
+      },
+      {
+        "id": "dl_comb",
+        "subjectId": "dl",
+        "title": "Combinational Circuits",
+        "subtopics": ["Half Adder, Full Adder, Carry Lookahead Adder", "Multiplexers & Demultiplexers", "Decoders & Encoders"],
+        "recommendedVideoId": "1g6qHk5h04M"
+      },
+      {
+        "id": "dl_seq",
+        "subjectId": "dl",
+        "title": "Sequential Circuits & Finite State Machines",
+        "subtopics": ["SR, JK, D, T Flip-Flops & Excitation Tables", "Synchronous & Asynchronous Counters", "State Diagrams & FSM (Mealy vs Moore)"],
+        "recommendedVideoId": "4vQ3Lq_w7t8"
+      }
+    ]
+  },
+  {
+    "id": "dm",
+    "name": "Discrete Mathematics",
+    "shortCode": "DM",
+    "description": "Propositional & First-Order Logic, Sets, Relations, Functions, Partial Orders & Lattices, Groups, Graph Theory, Combinatorics",
+    "topics": [
+      {
+        "id": "dm_logic",
+        "subjectId": "dm",
+        "title": "Propositional & Predicate Logic",
+        "subtopics": ["Tautologies, Contradictions, Equivalences", "First-Order Logic Quantifiers (For All, There Exists)", "Rules of Inference"],
+        "recommendedVideoId": "wgl4Qy91TQE"
+      },
+      {
+        "id": "dm_sets_rel",
+        "subjectId": "dm",
+        "title": "Sets, Relations & Functions",
+        "subtopics": ["Equivalence Relations & Partitions", "Partial Order Relations & Hasse Diagrams", "Lattices & Distributive Lattices"],
+        "recommendedVideoId": "1T64g8_8N0w"
+      },
+      {
+        "id": "dm_graphs",
+        "subjectId": "dm",
+        "title": "Graph Theory",
+        "subtopics": ["Connectivity, Paths & Cycles", "Eulerian & Hamiltonian Graphs", "Planar Graphs & Euler's Formula", "Graph Coloring & Chromatic Number"],
+        "recommendedVideoId": "t1e8gE9tWpM"
+      },
+      {
+        "id": "dm_comb",
+        "subjectId": "dm",
+        "title": "Combinatorics & Generating Functions",
+        "subtopics": ["Permutations & Combinations", "Pigeonhole Principle", "Principle of Inclusion-Exclusion", "Recurrence Relations"],
+        "recommendedVideoId": "kX7lP8_1mQ4"
+      }
+    ]
+  },
+  {
+    "id": "em",
+    "name": "Engineering Mathematics",
+    "shortCode": "EM",
+    "description": "Linear Algebra, Calculus, Probability & Statistics",
+    "topics": [
+      {
+        "id": "em_linear",
+        "subjectId": "em",
+        "title": "Linear Algebra",
+        "subtopics": ["Matrices, Determinants, Rank of a Matrix", "System of Linear Equations (Consistency)", "Eigenvalues & Eigenvectors", "Cayley-Hamilton Theorem"],
+        "recommendedVideoId": "kjBOesZCoqc"
+      },
+      {
+        "id": "em_calc",
+        "subjectId": "em",
+        "title": "Calculus",
+        "subtopics": ["Limits, Continuity & Differentiability", "Maxima & Minima (Single & Multi-variable)", "Mean Value Theorems", "Definite & Improper Integrals"],
+        "recommendedVideoId": "WUvTyaaNjfo"
+      },
+      {
+        "id": "em_prob",
+        "subjectId": "em",
+        "title": "Probability & Statistics",
+        "subtopics": ["Conditional Probability & Bayes' Theorem", "Random Variables (Discrete & Continuous)", "Binomial, Poisson, Normal, Exponential Distributions", "Mean, Median, Mode & Standard Deviation"],
+        "recommendedVideoId": "I_q3h3L1Kk8"
+      }
+    ]
+  },
+  {
+    "id": "ga",
+    "name": "General Aptitude",
+    "shortCode": "GA",
+    "description": "Verbal Ability, Numerical Ability, Reasoning & Spatial Aptitude (15 Marks)",
+    "topics": [
+      {
+        "id": "ga_quant",
+        "subjectId": "ga",
+        "title": "Quantitative & Numerical Ability",
+        "subtopics": ["Percentages, Ratios, Profit & Loss", "Speed, Time & Distance", "Work & Wages", "Data Interpretation & Graphs"],
+        "recommendedVideoId": "mNq3W8k5V9s"
+      },
+      {
+        "id": "ga_reasoning",
+        "subjectId": "ga",
+        "title": "Logical & Spatial Reasoning",
+        "subtopics": ["Syllogisms & Deductive Logic", "Blood Relations & Direction Sense", "Spatial Aptitude (Paper Folding, Mirror Images)"],
+        "recommendedVideoId": "6q1W_K3k08E"
+      },
+      {
+        "id": "ga_verbal",
+        "subjectId": "ga",
+        "title": "Verbal Ability & Grammar",
+        "subtopics": ["Sentence Completion & Tenses", "Vocabulary & Analogies", "Reading Comprehension & Critical Reasoning"],
+        "recommendedVideoId": "8K2W8s1L5e0"
+      }
+    ]
+  }
+]

@@ -1,8 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppTheme" parent="android:style/Theme.Material.Light.NoActionBar">
-        <item name="android:colorAccent">#4568E8</item>
-        <item name="android:statusBarColor">#10182D</item>
-        <item name="android:navigationBarColor">#10182D</item>
+    <style name="AppTheme" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/primary_indigo</item>
+        <item name="colorSecondary">@color/accent_emerald</item>
+        <item name="android:statusBarColor">@color/bg_app</item>
+        <item name="android:navigationBarColor">@color/bg_app</item>
+        <item name="android:windowBackground">@color/bg_app</item>
         <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <!-- Floating Nav Active Indicator Pill Style -->
+    <style name="FloatingNavIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/nav_indicator</item>
+        <item name="android:width">48dp</item>
+        <item name="android:height">32dp</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.PillIndicator</item>
+    </style>
+
+    <style name="ShapeAppearance.PillIndicator" parent="ShapeAppearance.Material3.Corner.Full">
+        <item name="cornerSize">16dp</item>
     </style>
 </resources>
